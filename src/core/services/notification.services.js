@@ -1,7 +1,7 @@
 import { $X } from '@/core/xQuery/xQuery.lib'
 import styles from '@/components/layout/notification/notification.module.scss'
 
-export class notificationservices {
+export class NotificationServices {
   #timeout
   constructor() {
     this.#timeout = null

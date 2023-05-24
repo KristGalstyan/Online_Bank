@@ -1,5 +1,7 @@
 import { SERVER_URL } from '@/config/url.config'
-import { extractErrorMessage } from './extract.error.message'
+
+import { extractErrorMessage } from './extract-error-message'
+
 /**
  * RedQuery is a minimalistic library for handling API requests.
  * Fetch data from the API with provided options.
@@ -21,13 +23,12 @@ export async function xsQuery({
   onError = null,
   onSuccess = null
 }) {
-  let isLoading = true
-  let error = null
-  let data = null
+  let isLoading = true,
+    error = null,
+    data = null
   const url = `${SERVER_URL}/api${path}`
 
-  //   Access_token from LS
-
+  /* ACCESS_TOKEN from LS */
   const accessToken = ''
 
   const requestOptions = {
@@ -48,6 +49,7 @@ export async function xsQuery({
 
   try {
     const response = await fetch(url, requestOptions)
+
     if (response.ok) {
       data = await response.json()
       if (onSuccess) {
@@ -56,12 +58,16 @@ export async function xsQuery({
     } else {
       const errorData = await response.json()
       const errorMessage = extractErrorMessage(errorData)
+
       if (onError) {
         onError(errorMessage)
       }
+
+      /* Notification error */
     }
-  } catch (error) {
-    const errorMessage = extractErrorMessage(error)
+  } catch (errorData) {
+    const errorMessage = extractErrorMessage(errorData)
+
     if (errorMessage) {
       onError(errorMessage)
     }
