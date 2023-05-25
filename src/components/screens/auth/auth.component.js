@@ -1,13 +1,16 @@
 import { BaseScreen } from '@/core/component/base.screen.component'
 
 import renderService from '@/core/services/render.services'
-import { Field } from '@/components/ui/field/field.component'
+import formService from '@/core/services/form.service'
 import { AuthService } from '@/api/auth.service'
+import { Field } from '@/components/ui/field/field.component'
 
 import styles from './auth.module.scss'
 import template from './auth.template.html'
 import { $X } from '@/core/xQuery/xQuery.lib'
 import { Button } from '@/components/ui/button/button.component'
+
+import validationService from '@/core/services/validation.service'
 
 export class Auth extends BaseScreen {
   #isTypeLogin = true
@@ -16,8 +19,22 @@ export class Auth extends BaseScreen {
     this.authService = new AuthService()
   }
 
+  #validateFields(formValues) {
+    const emailLabel = $X(this.element).find('label:first-child')
+    const passwordLabel = $X(this.element).find('label:last-child')
+    if (!formValues.email) {
+      validationService.showError(emailLabel)
+    }
+
+    if (!formValues.password) {
+      validationService.showError(passwordLabel)
+    }
+    return formValues.email && formValues.password
+  }
+
   #handleSubmit = (e) => {
-    console.log(e.target)
+    const formValues = formService.getFormValues(e.target)
+    if (!this.#validateFields(formValues)) return
   }
 
   #changeFormType(e) {
