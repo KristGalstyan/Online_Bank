@@ -1,12 +1,13 @@
 import { NotificationServices } from '@/core/services/notification.services'
-import { StorageService } from '@/core/services/storage.service'
 import { xsQuery } from '.@/core/xs-query/xs-query.lib'
+import { Store } from '@/core/store/store'
 
 export class CardService {
   #BASE_URL = '/cards'
 
   constructor() {
-    //store
+    this.store = Store.getInstance()
+
     this.notificationService = new NotificationServices()
   }
 
@@ -34,9 +35,9 @@ export class CardService {
       path: `${this.#BASE_URL}/transfer-money`,
       method: 'PATCH',
       body: {
-        amount: +amount
-        // fromCardNumber: this.store.user.card.number,
-        // toCardNumber
+        amount: +amount,
+        fromCardNumber: this.store.user.card.number,
+        toCardNumber
       },
       onSuccess: () => {
         this.notificationService().show(

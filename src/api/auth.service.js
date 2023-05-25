@@ -1,11 +1,11 @@
 import { NotificationServices } from '@/core/services/notification.services'
-import { xsQuery } from '.@/core/xs-query/xs-query.lib'
-
+import { xsQuery } from '@/core/xs-query/xs-query.lib'
+import Store from '@/store/store'
 export class AuthService {
   #BASE_URL = '/auth'
 
   constructor() {
-    //store
+    this.store = Store.getInstance()
     this.notificationService = new NotificationServices()
   }
 
@@ -14,7 +14,7 @@ export class AuthService {
       path: `${this.#BASE_URL}/${type}`,
       body,
       onSuccess: (data) => {
-        // login store
+        this.store.login(data.user, data.accessToken)
         this.notificationService.show(
           'success',
           'You have successfuly logged in!'

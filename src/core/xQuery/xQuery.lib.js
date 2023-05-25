@@ -22,6 +22,17 @@ class XQuery {
     }
   }
 
+  submit(onSubmit) {
+    if (this.element.tagName.toLocaleLowerCase() === 'form') {
+      this.element.addEventListener('submit', (e) => {
+        e.preventDefault()
+        onSubmit(e)
+      })
+    } else {
+      throw new Error('Element must be a form')
+    }
+  }
+
   click(callback) {
     this.element.addEventListener('click', callback)
     return this
