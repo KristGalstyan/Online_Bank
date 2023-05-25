@@ -1,4 +1,5 @@
 import { StorageService } from '@/core/services/storage.service'
+import { USER_STORAGE_KEY, ACCESS_TOKEN_KEY } from '@/constants/auth.constants'
 
 // Singleton Pattern
 export default class Store {
@@ -6,15 +7,15 @@ export default class Store {
     this.observers = []
 
     this.storageService = new StorageService()
-    const savedUser = this.storageService.getItem('user')
+    const savedUser = this.storageService.getItem(USER_STORAGE_KEY)
 
     const state = savedUser ? { user: savedUser } : initialState
 
     this.state = new Proxy(state, {
       set: (target, property, value) => {
         target[property] = value
-        this.notify()
 
+        this.notify()
         return true
       }
     })
@@ -43,20 +44,20 @@ export default class Store {
 
   login(user, accessToken) {
     this.state.user = user
-    this.storageService.setItem('user', user)
-    this.storageService.setItem('AccessToken', accessToken)
+    this.storageService.setItem(USER_STORAGE_KEY, user)
+    this.storageService.setItem(ACCESS_TOKEN_KEY, accessToken)
   }
 
   logout(user, accessToken) {
     this.state.user = null
-    this.storageService.removeItem('user', user)
-    this.storageService.removeItem('AccessToken', accessToken)
+    this.storageService.removeItem(USER_STORAGE_KEY, user)
+    this.storageService.removeItem(ACCESS_TOKEN_KEY, accessToken)
   }
 
   upDateCard(card) {
     const oldUser = this.state.user
     const newUser = { ...oldUser, card }
     this.state.user = newUser
-    this.storageService.setItem('AccessToken', newUser)
+    this.storageService.setItem(ACCESS_TOKEN_KEY, newUser)
   }
 }
