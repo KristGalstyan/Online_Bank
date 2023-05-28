@@ -1,6 +1,6 @@
 import { NotificationServices } from '@/core/services/notification.services'
-import { xsQuery } from '.@/core/xs-query/xs-query.lib'
-import { Store } from '@/core/store/store'
+import { xsQuery } from '@/core/xs-query/xs-query.lib'
+import Store from '@/store/store'
 
 export class CardService {
   #BASE_URL = '/cards'
@@ -11,7 +11,7 @@ export class CardService {
     this.notificationService = new NotificationServices()
   }
 
-  byUser() {
+  byUser(onSuccess) {
     return xsQuery({
       path: `${this.#BASE_URL}/by-user`,
       onSuccess
