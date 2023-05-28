@@ -32,6 +32,13 @@ class XQuery {
       throw new Error('Element must be a form')
     }
   }
+  on(eventType, callback) {
+    if (typeof eventType !== 'string' || typeof callback !== 'function') {
+      throw new Error('eventType must be a string and callback function')
+    }
+    this.element.addEventListener(eventType, callback)
+    return this
+  }
 
   click(callback) {
     this.element.addEventListener('click', callback)
