@@ -41,6 +41,17 @@ class XQuery {
   /**
    * STYLES
    */
+
+  show() {
+    this.element.style.removeProperty('display')
+    return this
+  }
+
+  hide() {
+    this.element.style.display = 'none'
+    return this
+  }
+
   input({ onInput, ...rest }) {
     if (this.element.tagName.toLowerCase() === 'INPUT') {
       throw new Error('Element must be an input')
