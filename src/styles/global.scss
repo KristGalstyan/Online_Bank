@@ -4,36 +4,43 @@
 input,
 button,
 body {
-	font-family: $font;
+  font-family: $font;
 }
 
 body {
-	background-color: #1b1d1f;
-	color: $white;
-	font-size: 17px;
-	line-height: 1.6;
+  background-color: #1b1d1f;
+  color: $white;
+  font-size: 17px;
+  line-height: 1.6;
 }
 
 input {
-	font-size: 16px;
-	background-color: transparent;
-	color: $white;
+  font-size: 16px;
+  background-color: transparent;
+  color: $white;
 
-	&::placeholder {
-		color: $text-gray;
-	}
+  &::placeholder {
+    color: $text-gray;
+  }
 }
 
 a {
-	color: $white;
-	text-decoration: none;
-	transition: border-color 0.3s ease-in-out;
-	border-bottom: 1px solid transparent;
-	animation: drawing 0.4s;
+  color: $white;
+  text-decoration: none;
+  transition: border-color 0.3s ease-in-out;
+  border-bottom: 1px solid transparent;
+  animation: drawing 0.4s;
 
-	&:hover {
-		border-color: $primary;
-	}
+  &:hover {
+    border-color: $primary;
+  }
 }
-
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+}
 @import './keyframes';

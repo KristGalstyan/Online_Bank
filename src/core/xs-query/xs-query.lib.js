@@ -70,11 +70,10 @@ export async function xsQuery({
       new NotificationServices().show('error', errorMessage)
     }
   } catch (errorData) {
-    const errorMessage = extractErrorMessage(errorData)
-    debugger
-    if (errorMessage) {
-      onError(errorMessage)
-    }
+    // const errorMessage = extractErrorMessage(errorData)
+    // if (errorMessage) {
+    //   onError(errorMessage)
+    // }
   } finally {
     isLoading = false
   }

@@ -3,6 +3,7 @@ import { $X } from '@/core/xQuery/xQuery.lib'
 import renderService from '@/core/services/render.services'
 
 import Store from '@/store/store'
+import { BALANCE_UPDATED } from '@/constants/event.constants'
 
 import { formatCardNumber } from '@/utils/format/format-card-number'
 import { formatToCurrency } from '@/utils/format/format-to-currency'
@@ -22,6 +23,24 @@ export class CardInfo extends ChildComponent {
     this.cardService = new CardService()
 
     this.element = renderService.htmlToElement(template, [], styles)
+
+    this.#addListener()
+  }
+
+  #addListener() {
+    document.addEventListener(BALANCE_UPDATED, this.#onBalanceUpdated)
+  }
+
+  #removeListener() {
+    document.removeEventListener(BALANCE_UPDATED, this.#onBalanceUpdated)
+  }
+
+  destroy() {
+    this.#removeListener()
+  }
+
+  #onBalanceUpdated = () => {
+    this.fetchData()
   }
 
   #copyCardNumber(e) {

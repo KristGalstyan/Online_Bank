@@ -57,6 +57,7 @@ export default class Store {
   upDateCard(card) {
     const oldUser = this.state.user
     const newUser = { ...oldUser, card }
+    console.log(card)
     this.state.user = newUser
     this.storageService.setItem(ACCESS_TOKEN_KEY, newUser)
   }

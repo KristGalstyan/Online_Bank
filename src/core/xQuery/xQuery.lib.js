@@ -307,8 +307,30 @@ class XQuery {
       return this.element.getAttribute(attributeName)
     } else {
       this.element.setAttribute(attributeName, value)
+    }
+    return this
+  }
+
+  /**
+   * Gets or sets the value of an input element.
+   * @param {string} [newValue] - The new value to set for the input element. If not provided, the method returns the current value.
+   * @return {string|XQuery} - If newValue is provided, returns the RQuery instance. Otherwise, returns the current value of the input element.
+   */
+  value(newValue) {
+    if (typeof newValue === 'undefined') {
+      return this.element.value
+    } else {
+      this.element.value = newValue
       return this
     }
+  }
+
+  removeAttr(attrName) {
+    if (typeof attrName !== 'string') {
+      throw new Error('Attribute name must be a string')
+    }
+    this.element.removeAttribute(attrName)
+    return this
   }
 }
 
