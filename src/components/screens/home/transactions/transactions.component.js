@@ -51,7 +51,6 @@ export class Transactions extends ChildComponent {
   fetchData() {
     this.transactionService.getAll((data) => {
       if (!data) return
-      console.log(data)
 
       const loaderElement = this.element.querySelector(LOADER_SELECTOR)
       if (loaderElement) loaderElement.remove()

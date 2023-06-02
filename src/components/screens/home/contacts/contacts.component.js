@@ -11,6 +11,7 @@ import template from './contacts.template.html'
 import { TransferField } from './transfer-field/transfer-field.component'
 import { Heading } from '@/components/ui/heading/heading.component'
 import { LOADER_SELECTOR } from '@/components/ui/loader/loader.component'
+
 import { UserItem } from '@/components/ui/user-item/user-item.component'
 import { formatCardNumberWithDashes } from '@/utils/format/format-card-number'
 

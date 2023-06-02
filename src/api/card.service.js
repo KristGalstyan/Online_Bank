@@ -7,6 +7,7 @@ export class CardService {
 
   constructor() {
     this.store = Store.getInstance().state
+
     this.notificationService = new NotificationServices()
   }
 

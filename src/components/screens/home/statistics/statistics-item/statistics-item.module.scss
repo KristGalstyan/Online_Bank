@@ -1,0 +1,69 @@
+@import 'src/styles/variables';
+@import 'src/styles/mixins';
+
+.statistic-item {
+  padding: 1rem;
+  border-radius: $radius;
+  margin-bottom: 1rem;
+  position: relative;
+
+  &::after,
+  &::before {
+    @include transition;
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: $radius;
+  }
+
+  &::after {
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+  }
+
+  &::before {
+    bottom: -3px;
+    right: -3px;
+    z-index: 1;
+  }
+
+  &.green {
+    &::before {
+      background-color: darken($secondary, 25%);
+    }
+
+    &::after {
+      background-color: rgba($secondary, 95%);
+    }
+  }
+
+  &.purple {
+    &::before {
+      background-color: #7661e4;
+    }
+
+    &::after {
+      background-color: rgba($primary, 95%);
+    }
+  }
+
+  > span {
+    color: #111;
+    display: inline-block;
+    z-index: 2;
+    position: relative;
+
+    &:first-child {
+      margin-right: 0.6rem;
+      opacity: 0.8;
+      font-weight: 500;
+    }
+
+    &:last-child {
+      font-size: 18px;
+      font-weight: 500;
+    }
+  }
+}
