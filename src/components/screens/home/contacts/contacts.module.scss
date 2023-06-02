@@ -1,0 +1,16 @@
+@import 'src/styles/mixins';
+@import 'src/styles/variables';
+
+.contacts {
+  @include dashboard-section('small');
+
+  > div:last-child {
+    button {
+      margin-bottom: 1rem;
+      width: 100%;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

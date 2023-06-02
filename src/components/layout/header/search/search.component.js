@@ -7,6 +7,7 @@ import styles from './search.module.scss'
 import template from './search.template.html'
 import { UserItem } from '@/components/ui/user-item/user-item.component'
 import { debounce } from '@/utils/debounce.util'
+import { formatCardNumberWithDashes } from '@/utils/format/format-card-number'
 
 export class Search extends ChildComponent {
   constructor() {
@@ -27,6 +28,9 @@ export class Search extends ChildComponent {
       searchResultElement.html('')
       users.forEach((user, index) => {
         const userItem = new UserItem(user, true, () => {
+          $X('[name="card-number"]').value(
+            formatCardNumberWithDashes(user.card.number)
+          )
           searchResultElement.html('')
         }).render()
         $X(userItem)
