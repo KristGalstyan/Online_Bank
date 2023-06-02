@@ -1,0 +1,114 @@
+@import 'src/styles/variables';
+@import 'src/styles/mixins';
+
+.transaction-item {
+  @include transition(background-color);
+  display: grid;
+  grid-template-columns: 3fr 2fr 1fr;
+  font-size: 20px;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba($text-gray, 20%);
+  cursor: default;
+  border-radius: $radius;
+  animation: slideIn 0.7s;
+
+  &:hover {
+    background-color: rgba($text-gray, 7%);
+
+    > div:nth-child(1) > div {
+      opacity: 1;
+    }
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &.income {
+    > div:nth-child(1) {
+      > div {
+        background-color: $secondary;
+
+        > svg > path {
+          &:first-child {
+            display: block;
+          }
+          &:last-child {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  > div {
+    @include flex-horizontal-center;
+
+    &:nth-child(1) {
+      margin-left: 1rem;
+      > div {
+        @include transition(opacity);
+        background-color: $primary;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        margin-right: 1rem;
+        opacity: 0.9;
+
+        > svg {
+          margin: auto;
+          color: $bg-block;
+          width: 32px;
+          height: 32px;
+
+          > path:first-child {
+            display: none;
+          }
+        }
+      }
+    }
+
+    &:nth-child(2) {
+      > div {
+        @include flex-horizontal-center;
+        background-color: $gray;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        margin-right: 1rem;
+        justify-content: center;
+
+        > svg {
+          color: $text-gray;
+          width: 25px;
+          height: 25px;
+        }
+      }
+
+      > span {
+        color: lighten($text-gray, 8%);
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+
+  70% {
+    transform: translateX(20px);
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}

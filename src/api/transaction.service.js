@@ -1,4 +1,4 @@
-import { xsQuery } from '.@/core/xs-query/xs-query.lib'
+import { xsQuery } from '@/core/xs-query/xs-query.lib'
 
 export class TransactionService {
   #BASE_URL = '/transactions'

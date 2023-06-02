@@ -49,7 +49,6 @@ export class Contacts extends ChildComponent {
   }
 
   render() {
-    // console.log(this.store)
     this.element = renderService.htmlToElement(
       template,
       [TransferField, new Heading('Transfer money')],

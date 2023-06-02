@@ -55,7 +55,6 @@ export async function xsQuery({
 
     if (response.ok) {
       data = await response.json()
-
       if (onSuccess) {
         onSuccess(data)
       }

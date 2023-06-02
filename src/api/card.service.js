@@ -25,7 +25,7 @@ export class CardService {
    * @param {function} onSuccess - The callback function to be executed when the balance update is successful.
    * @returns {Promise} A Promise object that resolves to the response from the API.
    */
-  updateBalance(amount, type, onSuccess) {
+  upDateBalance(amount, type, onSuccess) {
     return xsQuery({
       path: `${this.#BASE_URL}/balance/${type}`,
       method: 'PATCH',
