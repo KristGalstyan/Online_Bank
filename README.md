@@ -15,4 +15,4 @@
 
 # Image Web Page
 
-![HeadImg]('./assets/img/head.jpg')
+![HeadImg](https://github.com/KristGalstyan/Online_Bank/blob/main/assets/img/head.jpg)
