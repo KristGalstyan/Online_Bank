@@ -1,6 +1,7 @@
 import ChildComponent from '@/core/component/child.component'
 import { $X } from '@/core/xQuery/xQuery.lib'
 import renderService from '@/core/services/render.services'
+import { Loader } from '@/components/ui/loader/loader.component'
 
 import Store from '@/store/store'
 import { BALANCE_UPDATED } from '@/constants/event.constants'
@@ -102,7 +103,11 @@ export class CardInfo extends ChildComponent {
   }
 
   render() {
-    if (this.store.state.user) this.fetchData()
+    if (this.store.state.user)
+      $X(this.element).html(new Loader().render().outerHTML)
+    setTimeout(() => {
+      this.fetchData()
+    }, 500)
 
     return this.element
   }
