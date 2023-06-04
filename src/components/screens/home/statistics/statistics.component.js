@@ -12,6 +12,7 @@ import styles from './statistics.module.scss'
 import template from './statistics.template.html'
 import { LOADER_SELECTOR } from '@/components/ui/loader/loader.component'
 import { StatisticsItem } from './statistics-item/statistics-item.component'
+import { CircleChart } from './circle-chart/circle-chart.component'
 
 export class Statistics extends ChildComponent {
   constructor() {
@@ -45,6 +46,23 @@ export class Statistics extends ChildComponent {
     this.#removeListener()
   }
 
+  renderChart(income, expense) {
+    const total = income + expense
+    let incomePercent = (income * 100) / total
+    let expensePercent = 100 - incomePercent
+
+    if (income && !expense) {
+      incomePercent = 100
+      expensePercent = 0.1
+    }
+    if (!income && expense) {
+      incomePercent = 0.1
+      expensePercent = 100
+    }
+
+    return new CircleChart(incomePercent, expensePercent).render()
+  }
+
   #onTransactionCompleted = () => {
     this.fetchData()
   }
@@ -59,8 +77,8 @@ export class Statistics extends ChildComponent {
       const statisticsItemsElement = $X(this.element).find('#statistics-items')
       statisticsItemsElement.text('')
 
-      /* const circleChartElement = $X(this.element).find('#circle-chart')
-			circleChartElement.text('') */
+      const circleChartElement = $X(this.element).find('#circle-chart')
+      circleChartElement.text('')
 
       statisticsItemsElement
         .append(
@@ -77,6 +95,8 @@ export class Statistics extends ChildComponent {
             'purple'
           ).render()
         )
+
+      circleChartElement.append(this.renderChart(data[0].value, data[1].value))
     })
   }
 
